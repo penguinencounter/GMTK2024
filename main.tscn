@@ -1,0 +1,59 @@
+[gd_scene load_steps=9 format=3 uid="uid://cdj570vx7bfwf"]
+
+[ext_resource type="Script" path="res://character_body_2d.gd" id="1_l2jaw"]
+[ext_resource type="Texture2D" uid="uid://dq62cuel1e7r6" path="res://icon.svg" id="2_ex3ug"]
+[ext_resource type="Script" path="res://world_bounds.gd" id="3_gydat"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qcc0y"]
+size = Vector2(64, 127)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_j08ob"]
+normal = Vector2(0, 1)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_porwc"]
+normal = Vector2(1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ijb2f"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_jtbl6"]
+normal = Vector2(-1, 0)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+position = Vector2(403, 276)
+platform_floor_layers = 4294967294
+script = ExtResource("1_l2jaw")
+
+[node name="Icon" type="Sprite2D" parent="CharacterBody2D"]
+scale = Vector2(0.5, 1)
+texture = ExtResource("2_ex3ug")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(-1, -0.5)
+shape = SubResource("RectangleShape2D_qcc0y")
+
+[node name="WorldBounds" type="Node2D" parent="." node_paths=PackedStringArray("right", "bottom")]
+script = ExtResource("3_gydat")
+right = NodePath("AnimatableBody2D4")
+bottom = NodePath("AnimatableBody2D3")
+
+[node name="AnimatableBody2D" type="AnimatableBody2D" parent="WorldBounds"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBounds/AnimatableBody2D"]
+shape = SubResource("WorldBoundaryShape2D_j08ob")
+
+[node name="AnimatableBody2D2" type="AnimatableBody2D" parent="WorldBounds"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBounds/AnimatableBody2D2"]
+shape = SubResource("WorldBoundaryShape2D_porwc")
+
+[node name="AnimatableBody2D3" type="AnimatableBody2D" parent="WorldBounds"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBounds/AnimatableBody2D3"]
+shape = SubResource("WorldBoundaryShape2D_ijb2f")
+
+[node name="AnimatableBody2D4" type="AnimatableBody2D" parent="WorldBounds"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBounds/AnimatableBody2D4"]
+shape = SubResource("WorldBoundaryShape2D_jtbl6")
