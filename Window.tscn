@@ -1,0 +1,109 @@
+[gd_scene load_steps=7 format=3 uid="uid://bxx4lgv8tv3wh"]
+
+[ext_resource type="Script" path="res://window.gd" id="1_olctc"]
+[ext_resource type="Texture2D" uid="uid://cjyotca4kgrvt" path="res://debug_window.png" id="1_tcr8u"]
+[ext_resource type="Theme" uid="uid://dk6yiv3k4h0d5" path="res://closebutton.tres" id="2_i8y2s"]
+
+[sub_resource type="Animation" id="Animation_sv63d"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DisplayBorders:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_15b58"]
+resource_name = "close"
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"close_destroy"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DisplayBorders:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(0.2, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 1e-05)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vvmpf"]
+_data = {
+"RESET": SubResource("Animation_sv63d"),
+"close": SubResource("Animation_15b58")
+}
+
+[node name="Window" type="Control"]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 0
+offset_right = 47.0
+offset_bottom = 30.0
+size_flags_horizontal = 8
+size_flags_vertical = 8
+script = ExtResource("1_olctc")
+
+[node name="DisplayBorders" type="NinePatchRect" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_tcr8u")
+region_rect = Rect2(0, 0, 32, 32)
+patch_margin_left = 2
+patch_margin_top = 5
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="ContentSlot" type="Control" parent="DisplayBorders"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 5.0
+offset_right = -2.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Close" type="Button" parent="DisplayBorders"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -5.0
+offset_bottom = 5.0
+grow_horizontal = 0
+theme = ExtResource("2_i8y2s")
+
+[node name="CloseAnimation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_vvmpf")
+}

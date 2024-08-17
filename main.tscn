@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://vx6ad50uwlsi"]
+
+[ext_resource type="PackedScene" uid="uid://bxx4lgv8tv3wh" path="res://Window.tscn" id="1_roev8"]
+[ext_resource type="PackedScene" uid="uid://va1xfcitw62r" path="res://games/example_container.tscn" id="2_36v1p"]
+
+[node name="main" type="Node"]
+
+[node name="Window" parent="." node_paths=PackedStringArray("_content") instance=ExtResource("1_roev8")]
+offset_left = -40.0
+offset_top = -20.0
+offset_right = 79.0
+offset_bottom = 63.0
+_content = NodePath("ExampleMicrogame")
+
+[node name="ExampleMicrogame" parent="Window" instance=ExtResource("2_36v1p")]
+visible = false
+layout_mode = 1
+offset_left = 40.0
+offset_top = 20.0
+offset_right = 40.0
+offset_bottom = 20.0
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(4, 4)

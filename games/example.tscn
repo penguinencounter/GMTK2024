@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://gfpi4u57y50i"]
+
+[ext_resource type="Script" path="res://spin.gd" id="1_tanob"]
+
+[sub_resource type="Gradient" id="Gradient_0bhk2"]
+colors = PackedColorArray(0, 0, 0.556863, 1, 1, 0.27451, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_lu7wd"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_snxgs"]
+width = 2048
+height = 1024
+color_ramp = SubResource("Gradient_0bhk2")
+noise = SubResource("FastNoiseLite_lu7wd")
+
+[node name="ExampleMicrogame" type="Node2D"]
+script = ExtResource("1_tanob")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(600, 324)
+texture = SubResource("NoiseTexture2D_snxgs")
