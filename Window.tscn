@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://bxx4lgv8tv3wh"]
+[gd_scene load_steps=9 format=3 uid="uid://bxx4lgv8tv3wh"]
 
 [ext_resource type="Script" path="res://window.gd" id="1_olctc"]
 [ext_resource type="Texture2D" uid="uid://cjyotca4kgrvt" path="res://debug_window.png" id="1_tcr8u"]
 [ext_resource type="Theme" uid="uid://dk6yiv3k4h0d5" path="res://closebutton.tres" id="2_i8y2s"]
+[ext_resource type="Texture2D" uid="uid://dtlr1pdw5v7l4" path="res://debug_window_timer.png" id="4_7dlki"]
 
 [sub_resource type="Animation" id="Animation_sv63d"]
 length = 0.001
@@ -21,6 +22,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_15b58"]
 resource_name = "close"
+length = 0.1
 tracks/0/type = "method"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -48,18 +50,35 @@ tracks/1/keys = {
 "values": [Vector2(1, 1), Vector2(1, 1e-05)]
 }
 
+[sub_resource type="Animation" id="Animation_hgs3v"]
+resource_name = "open"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DisplayBorders:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(0.2, 1),
+"update": 0,
+"values": [Vector2(0.5, 0), Vector2(1, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_vvmpf"]
 _data = {
 "RESET": SubResource("Animation_sv63d"),
-"close": SubResource("Animation_15b58")
+"close": SubResource("Animation_15b58"),
+"open": SubResource("Animation_hgs3v")
 }
 
 [node name="Window" type="Control"]
 texture_filter = 1
 layout_mode = 3
 anchors_preset = 0
-offset_right = 47.0
-offset_bottom = 30.0
+offset_right = 48.0
+offset_bottom = 34.0
 size_flags_horizontal = 8
 size_flags_vertical = 8
 script = ExtResource("1_olctc")
@@ -92,7 +111,18 @@ offset_bottom = -2.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="TimerDisplay" type="TextureProgressBar" parent="DisplayBorders"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 48.0
+offset_bottom = 5.0
+nine_patch_stretch = true
+stretch_margin_left = 1
+stretch_margin_right = 1
+texture_progress = ExtResource("4_7dlki")
+
 [node name="Close" type="Button" parent="DisplayBorders"]
+unique_name_in_owner = true
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 1
@@ -103,7 +133,10 @@ offset_bottom = 5.0
 grow_horizontal = 0
 theme = ExtResource("2_i8y2s")
 
-[node name="CloseAnimation" type="AnimationPlayer" parent="."]
+[node name="Animations" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_vvmpf")
 }
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
