@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://bxx4lgv8tv3wh"]
+[gd_scene load_steps=10 format=3 uid="uid://bxx4lgv8tv3wh"]
 
 [ext_resource type="Script" path="res://window.gd" id="1_olctc"]
 [ext_resource type="Texture2D" uid="uid://cjyotca4kgrvt" path="res://debug_window.png" id="1_tcr8u"]
 [ext_resource type="Theme" uid="uid://dk6yiv3k4h0d5" path="res://closebutton.tres" id="2_i8y2s"]
-[ext_resource type="Texture2D" uid="uid://dtlr1pdw5v7l4" path="res://debug_window_timer.png" id="4_7dlki"]
+[ext_resource type="Texture2D" uid="uid://t4a3rul0xtgk" path="res://positive_timer.png" id="4_0eqvy"]
+[ext_resource type="Texture2D" uid="uid://dtlr1pdw5v7l4" path="res://negative_timer.png" id="4_7dlki"]
 
 [sub_resource type="Animation" id="Animation_sv63d"]
 length = 0.001
@@ -111,15 +112,31 @@ offset_bottom = -2.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TimerDisplay" type="TextureProgressBar" parent="DisplayBorders"]
+[node name="NegativeTimerDisplay" type="TextureProgressBar" parent="DisplayBorders"]
 unique_name_in_owner = true
-layout_mode = 0
-offset_right = 48.0
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
 offset_bottom = 5.0
+grow_horizontal = 2
+value = 66.0
 nine_patch_stretch = true
 stretch_margin_left = 1
 stretch_margin_right = 1
 texture_progress = ExtResource("4_7dlki")
+
+[node name="PositiveTimerDisplay" type="TextureProgressBar" parent="DisplayBorders"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 5.0
+grow_horizontal = 2
+value = 33.0
+nine_patch_stretch = true
+stretch_margin_left = 1
+stretch_margin_right = 1
+texture_progress = ExtResource("4_0eqvy")
 
 [node name="Close" type="Button" parent="DisplayBorders"]
 unique_name_in_owner = true
