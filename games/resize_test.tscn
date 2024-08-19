@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bvtvt3kpdg8ig"]
+
+[ext_resource type="Script" path="res://games/resize_test.gd" id="1_ul0ui"]
+
+[node name="Minesweeper" type="Node2D"]
+script = ExtResource("1_ul0ui")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5

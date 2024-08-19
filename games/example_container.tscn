@@ -1,14 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://va1xfcitw62r"]
+[gd_scene load_steps=3 format=3 uid="uid://va1xfcitw62r"]
 
+[ext_resource type="Script" path="res://parts/container.gd" id="1_fvtf3"]
 [ext_resource type="PackedScene" uid="uid://gfpi4u57y50i" path="res://games/example.tscn" id="2_1i1ra"]
 
-[node name="ExampleMicrogameContainer" type="SubViewportContainer"]
+[node name="ExampleMicrogameContainer" type="SubViewportContainer" node_paths=PackedStringArray("game")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 stretch = true
+script = ExtResource("1_fvtf3")
+game = NodePath("Viewport/TileMicrogame")
 
 [node name="Viewport" type="SubViewport" parent="."]
 handle_input_locally = false

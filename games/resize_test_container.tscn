@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://bcbxorkox0ma4"]
+
+[ext_resource type="Script" path="res://parts/container.gd" id="1_xsjms"]
+[ext_resource type="PackedScene" uid="uid://bvtvt3kpdg8ig" path="res://games/resize_test.tscn" id="2_o2m3s"]
+
+[node name="MicrogameContainer" type="SubViewportContainer" node_paths=PackedStringArray("game")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+script = ExtResource("1_xsjms")
+game = NodePath("SubViewport/ResizeTest")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+handle_input_locally = false
+size = Vector2i(1152, 648)
+render_target_update_mode = 4
+
+[node name="ResizeTest" parent="SubViewport" instance=ExtResource("2_o2m3s")]

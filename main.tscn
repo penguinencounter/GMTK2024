@@ -1,16 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://vx6ad50uwlsi"]
+[gd_scene load_steps=4 format=3 uid="uid://vx6ad50uwlsi"]
 
 [ext_resource type="PackedScene" uid="uid://bxx4lgv8tv3wh" path="res://Window.tscn" id="1_roev8"]
 [ext_resource type="PackedScene" uid="uid://va1xfcitw62r" path="res://games/example_container.tscn" id="2_36v1p"]
+[ext_resource type="PackedScene" uid="uid://bcbxorkox0ma4" path="res://games/resize_test_container.tscn" id="3_jbdcl"]
 
 [node name="main" type="Node"]
 
-[node name="Window" parent="." node_paths=PackedStringArray("_content") instance=ExtResource("1_roev8")]
+[node name="Window" parent="." node_paths=PackedStringArray("content") instance=ExtResource("1_roev8")]
 offset_left = -40.0
 offset_top = -20.0
 offset_right = 79.0
 offset_bottom = 63.0
-_content = NodePath("ExampleMicrogame")
+content = NodePath("ExampleMicrogame")
 
 [node name="ExampleMicrogame" parent="Window" instance=ExtResource("2_36v1p")]
 visible = false
@@ -22,3 +23,29 @@ offset_bottom = 20.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(4, 4)
+
+[node name="Button" type="Button" parent="."]
+offset_left = -48.0
+offset_top = -59.0
+offset_right = 11.0
+offset_bottom = -28.0
+scale = Vector2(0.25, 0.25)
+text = "RESIZE!"
+
+[node name="ResizeTestWindow" parent="." node_paths=PackedStringArray("content") instance=ExtResource("1_roev8")]
+offset_left = -107.0
+offset_top = -50.0
+offset_right = -59.0
+offset_bottom = -16.0
+content = NodePath("ResizeTestMicrogame")
+
+[node name="ResizeTestMicrogame" parent="ResizeTestWindow" instance=ExtResource("3_jbdcl")]
+visible = false
+layout_mode = 0
+anchors_preset = 0
+offset_left = -95.0
+offset_top = -50.0
+offset_right = -95.0
+offset_bottom = -50.0
+
+[connection signal="pressed" from="Button" to="Window" method="resize_inner" binds= [Vector2(50, 50)]]
